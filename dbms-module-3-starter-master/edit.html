@@ -7,34 +7,38 @@
 </head>
 <body>
 <div class='main'>
-    <h1>New Thesis Entry</h1>
+    
+    {% for thesis  in CpE_Thesis %}
+    {% if thesis.key.id()==id %}
+    <h1>Edit Thesis Entry</h1>
     <div class='form-section'>
-    <form class ="create-form" id='MyForm'>
+    <form id='MyForm2' action="/thesis/edit/{{thesis.key.id()}}" method ="post">
         <strong>School Year</strong>
             <select name="year" >
+            <option selected="selected">{{thesis.year}}</option>
             <option value="2011">2011</option>
             <option value="2012">2012</option>
             <option value="2013">2013</option>
             <option value="2014">2014</option>
             <option value="2015">2015</option>
+
         </select><p>
         <strong>Title</strong>
-        <input type="text" name="title" class="input" placeholder="Title"  required> <br>
+        <input type="text" name="title" class="input" placeholder="Title" value= "{{thesis.title}}" required> <br>
         <strong><p>Abstract</p></strong>
-      
-        <textarea name= "abstract" placeholder="Input Thesis Abstract Here" rows="3" cols="40"  required></textarea><br>
-       
+        <textarea name= "abstract" placeholder="Input Thesis Abstract Here" rows="3" cols="40"  required>{{thesis.abstract}}</textarea><br>
         <strong>Adviser</strong><br>
-        <input type="text" name="adviser" class="input" placeholder="Adviser"  required> <br> <br>
+        <input type="text" name="adviser" class="input" placeholder="Adviser" value= "{{thesis.adviser}}" required> <br> <br>
         <strong>Section</strong>
-            <select name="section">
+            <select name="section" value= "{{thesis.section}}">
+            <option selected="selected">{{thesis.section}}</option>
             <option value="1">1</option>
             <option value="2">2</option>
             <option value="3">3</option>
             <option value="4">4</option>
             <option value="5">5</option>
         </select><p><br>
-        <div><input type="submit" class="button" value="Register Thesis"  </div><br><br>
+        <div><input type="submit" class="button" value="Edit Thesis"  > </div><br><br>
         <!--        # thesis details
         # Year - Select (2011, 2012, 2013, 2014, 2015)
         # Title - Textbox
@@ -48,7 +52,8 @@
     </div>
 
    
-       <p ><ul class= "thesis-list" > </ul> <p> 
+    {% endif %}          
+    {% endfor %}
     
 </div>
 

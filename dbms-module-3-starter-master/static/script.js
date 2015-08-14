@@ -42,21 +42,30 @@ function loadAllthesis_list() {
 	$.get(thesis_list_api, {}, function(response){
 	console.log('thesis list', response)
 	response.data.forEach(function(thesis){
-	var full_name = thesis.year + ' ' + thesis.title;
+	var full_name = thesis.year + ' ' + thesis.title + '   '  + (' <a  href=\'thesis/edit/'+thesis.id+'\'>Edit</a>')+ ' ' + ('<a href=\'thesis/delete/'+thesis.id+'\'>Delete</a>');
 	$('.thesis-list').append('<li>' + full_name +'</li>');
+
+
 });
 });
 };
 
 
+
+
+
 function DeleteEntry(event){
 	$(this).parent().remove();
 	$(this).closest('li').remove();
-	
+				
 }
-loadAllthesis_list()
+
 $(document).on('click',  '.buttn' , DeleteEntry)
+
+
 $('.create-form').submit(onFormSubmit)
+loadAllthesis_list()
+
 $('.create-form').submit(function(onFormSubmit){ 
     this.reset();
 
